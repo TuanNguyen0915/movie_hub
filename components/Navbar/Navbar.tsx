@@ -1,12 +1,30 @@
 "use client";
 import Link from "next/link";
 import SearchInput from "./SearchInput";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const [dropDownMenu, setDropDownMenu] = useState<boolean>(false);
+  const [isScroll, setIsScroll] = useState<boolean>(false);
+  
+  const handleScrolling = () => {
+    if (window.scrollX > 100) {
+      setIsScroll(true);
+    } else {
+      setIsScroll(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScrolling);
+    // Cleanup function when component unmount (don't scroll)
+    return () => window.removeEventListener("scroll", handleScrolling);
+  }, []);
+  
   return (
-    <div className="sticky top-0 flex w-full items-center justify-between px-5 lg:px-0">
+    <div
+      className={`sticky top-0 z-10 flex w-full items-center justify-between px-5 lg:px-0 ${isScroll && "bg-red-500"}`}
+    >
       {/* LOGO */}
       <div className="group flex items-center">
         <Link href="/">

@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning={true}
         className={`${inter.className} mx-auto flex w-full max-w-[1440px] flex-col gap-10 bg-[#131116] py-10 text-white`}
       >
         <Navbar />
