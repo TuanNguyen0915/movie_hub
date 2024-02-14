@@ -9,19 +9,18 @@ import {
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "swiper/css";
+import HeroCard from "./HeroCard";
 
 const Hero = async () => {
   const trending = await fetchTrendingMovies();
-
   return (
-    <section className="w-full">
+    <section className="w-full relative">
       <Swiper
-        autoplay={{ delay: 2000 }}
+        autoplay={{ delay: 4000 }}
         slidesPerView={1}
         scrollbar={{ draggable: true }}
         pagination={{
@@ -29,7 +28,7 @@ const Hero = async () => {
         }}
         modules={[Pagination, Autoplay]}
       >
-        {trending.map((movie: IMovie) => (
+        {trending.slice(0, 10).map((movie: IMovie) => (
           <SwiperSlide key={movie.id}>
             <div
               style={{
@@ -40,14 +39,17 @@ const Hero = async () => {
               className={`relative h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
             >
               {/* MASK */}
-              <div className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
+              <div className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.6)] px-5 md:h-[90vh] md:px-20">
                 <div className="group flex w-full flex-1 flex-col justify-center">
                   <div className="h-[100px]">
                     <p className="flex items-center text-3xl text-red-500 duration-500 md:text-5xl md:group-hover:text-7xl">
-                      {movie.title ? movie.title : movie.name}
+                      {movie.title ||
+                        movie.name ||
+                        movie.original_title ||
+                        movie.original_name}
                     </p>
                   </div>
-                  <p className=" text-[12px] text-white duration-500 max-md:hidden md:w-1/2 lg:text-xl">
+                  <p className=" text-sm text-white duration-500 max-md:hidden md:w-1/2 xl:text-xl">
                     {movie.overview}
                   </p>
                   <div className="mt-10 flex w-full gap-4 md:gap-10">
@@ -66,6 +68,10 @@ const Hero = async () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      {/* SMALL MOVIE LIST */}
+      <div className="absolute lg:bottom-14 bottom-5 z-40 w-full hidden lg:block">
+        <HeroCard trending={trending.slice(0, 10)} />
+      </div>
     </section>
   );
 };
