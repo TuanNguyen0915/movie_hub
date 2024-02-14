@@ -1,14 +1,11 @@
-import { getBlurEffect } from "@/actions/getBlurEffect";
-import {
-  fetchTrendingMovies,
-  fetchGenresMovies,
-} from "@/actions/getMoviesData";
+import { fetchTrendingMovies } from "@/actions/getMoviesData";
 import { IMovie } from "@/types";
-import Image from "next/image";
+
 import {
   IoPlayCircleOutline,
   IoInformationCircleOutline,
 } from "react-icons/io5";
+import HeroSwipe from "./HeroSwipe";
 
 const Hero = async () => {
   const trending = await fetchTrendingMovies();
@@ -22,7 +19,7 @@ const Hero = async () => {
 
   return (
     <>
-      {selectedMovie && (
+      {trending && (
         <div
           style={{
             backgroundImage: `url('${movieBackground}')`,
@@ -30,8 +27,8 @@ const Hero = async () => {
           className={`relative h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
         >
           {/* MASK */}
-          <div className="absolute z-10 flex h-[40vh] w-full items-center rounded-lg bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
-            <div className="group flex flex-col">
+          <div className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
+            <div className="group flex flex-1 flex-col justify-center">
               <div className="h-[100px]">
                 <p className="flex items-center text-3xl text-red-500 duration-500 md:text-5xl md:group-hover:text-7xl">
                   {selectedMovie.title
@@ -39,7 +36,7 @@ const Hero = async () => {
                     : selectedMovie.name}
                 </p>
               </div>
-              <p className=" text-xl text-white duration-500 max-md:hidden md:text-[12px] md:w-1/2">
+              <p className=" text-[12px] text-white duration-500 max-md:hidden md:w-1/2 lg:text-xl">
                 {selectedMovie.overview}
               </p>
               <div className="mt-10 flex w-full gap-4 md:gap-10">
@@ -53,6 +50,7 @@ const Hero = async () => {
                 </button>
               </div>
             </div>
+            <HeroSwipe trending={trending} />
           </div>
         </div>
       )}
