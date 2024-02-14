@@ -1,9 +1,9 @@
-
+import Hero from "@/components/Hero/Hero";
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-10 text-center text-white">
-      <p>Home</p>
+    <div className="flex flex-col text-white">
+      <Hero />
     </div>
   );
 };

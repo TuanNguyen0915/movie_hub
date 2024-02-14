@@ -6,24 +6,22 @@ import { useEffect, useRef, useState } from "react";
 const Navbar = () => {
   const [dropDownMenu, setDropDownMenu] = useState<boolean>(false);
   const [isScroll, setIsScroll] = useState<boolean>(false);
-  
+
   const handleScrolling = () => {
-    if (window.scrollX > 100) {
+    if (window.scrollY > 10) {
       setIsScroll(true);
     } else {
       setIsScroll(false);
     }
   };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScrolling);
     // Cleanup function when component unmount (don't scroll)
     return () => window.removeEventListener("scroll", handleScrolling);
   }, []);
-  
   return (
-    <div
-      className={`sticky top-0 z-10 flex w-full items-center justify-between px-5 lg:px-0 ${isScroll && "bg-red-500"}`}
+    <nav
+      className={`sticky top-0 z-50 flex w-full items-center justify-between p-5 ${isScroll && "bg-black/80 backdrop-blur-lg backdrop-filter"}`}
     >
       {/* LOGO */}
       <div className="group flex items-center">
@@ -61,8 +59,9 @@ const Navbar = () => {
           onClick={() => setDropDownMenu(!dropDownMenu)}
         />
       </div>
+      {/* MOBILE RESPONSIVE */}
       {dropDownMenu && (
-        <div className="absolute right-10 top-20 z-20 flex min-w-40 flex-col gap-4 rounded-xl bg-white/5 p-4 backdrop-blur-lg">
+        <div className="absolute right-10 top-24 z-20 flex min-w-40 flex-col gap-4 rounded-xl bg-black/60 p-4 backdrop-blur-lg">
           <Link
             onClick={() => setDropDownMenu(false)}
             href="/"
@@ -85,7 +84,7 @@ const Navbar = () => {
           </p>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

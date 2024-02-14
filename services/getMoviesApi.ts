@@ -15,7 +15,6 @@ export const getMoviesApi = async (sub_url: string) => {
     const data = res.ok ? await res.json() : Promise.reject(res);
     return data;
   } catch (error) {
-    console.log(error);
     return Promise.reject(error);
   }
 };
