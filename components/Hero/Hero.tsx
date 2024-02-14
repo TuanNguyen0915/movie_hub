@@ -1,4 +1,7 @@
-import { fetchTrendingMovies, fetchGenresMovies } from "@/actions/getMoviesData";
+import {
+  fetchTrendingMovies,
+  fetchGenresMovies,
+} from "@/actions/getMoviesData";
 import { IMovie } from "@/types";
 import {
   IoPlayCircleOutline,
@@ -19,10 +22,10 @@ const Hero = async () => {
           style={{
             backgroundImage: `url('https://image.tmdb.org/t/p/original${movieBackground}')`,
           }}
-          className={`h-[40vh] w-full bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
+          className={`h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
         >
           {/* MASK */}
-          <div className="absolute z-10 flex h-[40vh] w-full items-center bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
+          <div className="absolute z-10 flex h-[40vh] w-full items-center rounded-lg bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
             <div className="group flex flex-col">
               <div className="h-[100px]">
                 <p className="flex items-center text-3xl text-red-500 duration-500 md:text-5xl md:group-hover:text-7xl">

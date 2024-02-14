@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${inter.className} relative mx-auto flex w-full max-w-[1440px] flex-col bg-[#131116] text-white`}
+        className={`${inter.className} relative mx-auto flex w-full max-w-[2160px] flex-col bg-[#131116] text-white`}
       >
         <Navbar />
         {children}
