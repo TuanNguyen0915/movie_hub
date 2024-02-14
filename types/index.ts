@@ -18,9 +18,16 @@ export interface IMovie {
   vote_count: number;
 }
 
-
 export interface IGenre {
-  id: number
-  name: string
-  movies?: IMovie[]
+  id: number;
+  name: string;
+  movies?: IMovie[];
 }
+
+export interface ICast {
+  id: number
+  name: string;
+  profile_path: string;
+  character: string;
+}
+
