@@ -1,20 +1,18 @@
 import { fetchGenresMovies } from "@/actions/getMoviesData";
-import { IGenre, IMovie } from "@/types";
-import MovieCard from "./MovieCard";
+import { IGenre } from "@/types";
+
+import MovieByGenre from "./MoviesEachGenre";
 
 const MoviesByGenres = async () => {
   const moviesByGenres = await fetchGenresMovies();
   return (
-    <div className="flex w-full flex-col gap-5 px-4">
+    <div className="flex w-full flex-col gap-4 px-4">
       {moviesByGenres.map((genre: IGenre) => (
         <div key={genre.id}>
-          <p className="text-2xl text-white">{genre.name}</p>
-          {/* {genre.movies?.map((movie: IMovie) => (
-            <div key={movie.id}>
-              <p className="text-red-200">{movie.name || movie.title}</p>
-            </div>
-          ))} */}
-          {genre.movies && <MovieCard movie={genre.movies[0]} />}
+          <p className="text-3xl text-white duration-500 hover:text-red-500">
+            Top 10 {genre.name}
+          </p>
+          {genre.movies && <MovieByGenre movies={genre.movies.slice(0, 10)} />}
         </div>
       ))}
     </div>

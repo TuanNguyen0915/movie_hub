@@ -6,7 +6,7 @@ const MovieCard = ({ movie }: { movie: IMovie }) => {
     ? movie.backdrop_path
     : movie.poster_path;
   return (
-    <div className="group flex h-[200px] w-[200px] flex-col justify-between gap-4 rounded-lg border border-[#131116] duration-500 hover:border-white">
+    <div className="group flex h-[300px] w-[300px] flex-col justify-between gap-4 rounded-lg border border-[#131116] duration-500 hover:border-white">
       <Image
         src={`https://image.tmdb.org/t/p/original${movieBackground}`}
         width={1000}
