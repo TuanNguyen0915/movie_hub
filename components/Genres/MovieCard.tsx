@@ -13,6 +13,7 @@ const MovieCard = async ({ movie }: { movie: IMovie }) => {
         src={movieBackground}
         // blurDataURL={base64}
         // placeholder="blur"
+        placeholder = 'empty'
         width={1000}
         height={1000}
         alt="movie poster"

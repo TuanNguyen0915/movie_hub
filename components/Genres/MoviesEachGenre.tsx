@@ -16,7 +16,7 @@ const MovieByGenre = ({ movies }: { movies: IMovie[] }) => {
       <div className="hidden lg:flex">
         <Swiper
           autoplay={{ delay: 4000 }}
-          spaceBetween={30}
+          spaceBetween={20}
           slidesPerView={4}
           scrollbar={{ draggable: true }}
           navigation={true}

@@ -13,44 +13,42 @@ html {
   scrollbar-width: none; /* Firefox */
 }
 
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  background: white !important;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  width: 16px !important;
+  height: 16px !important;
+  transition: width 0.5s !important;
+  background: red !important;
+}
+
 .swiper-button-next {
-  color: white;
+  color: white !important;
 }
 .swiper-button-next:hover {
-  color: red;
-}
-.swiper-button-next::after {
-  content: "";
-  color: white;
-}
-.swiper-button-next:hover::after {
-  color: red;
-}
-.swiper-button-next::before {
-  content: "";
-  color: white;
-}
-.swiper-button-next:hover::after{
-  color: red;
+  color: red !important;
 }
 
 .swiper-button-prev {
-  color: white;
+  color: white !important;
 }
 .swiper-button-prev:hover {
-  color: red;
+  color: red !important;
 }
-.swiper-button-prev::after {
-  content: "";
-  color: white;
-}
-.swiper-button-prev:hover::after {
-  color: red;
-}
-.swiper-button-prev::before {
-  content: "";
-  color: white;
-}
-.swiper-button-prev:hover::after{
-  color: red;
+
+@media only screen and (max-width: 1024px) {
+  .swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 10px !important;
+    height: 10px !important;
+  }
 }
