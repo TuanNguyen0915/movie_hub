@@ -4,3 +4,9 @@ export const getReleaseDate = (date) => {
   let getDate = new Date(filterDate);
   return getDate.getFullYear();
 };
+
+export const getCreateDate = (date) => {
+  let getDate = new Date(date);
+  let formatDate = `${getDate.getMonth()} - ${getDate.getDate()} - ${getDate.getFullYear()}`
+  return formatDate
+}

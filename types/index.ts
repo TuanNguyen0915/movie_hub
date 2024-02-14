@@ -25,9 +25,15 @@ export interface IGenre {
 }
 
 export interface ICast {
-  id: number
+  id: number;
   name: string;
   profile_path: string;
   character: string;
 }
 
+export interface IReview {
+  author: string;
+  content: string;
+  created_at: string;
+  id: string;
+}

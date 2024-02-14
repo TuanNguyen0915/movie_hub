@@ -14,16 +14,16 @@ const MoviesEachGenre = ({ movies }: { movies: IMovie[] }) => {
     <div className="w-full">
       <div className="flex">
         <Swiper
-          slidesPerView={1}
-          spaceBetween={50}
+          slidesPerView={2}
+          spaceBetween={10}
           breakpoints={{
             1024: {
-              slidesPerView: 2,
-              spaceBetween: 50,
+              slidesPerView: 4,
+              spaceBetween: 10,
             },
             1366: {
-              slidesPerView: 4,
-              spaceBetween: 50,
+              slidesPerView: 6,
+              spaceBetween: 20,
             },
           }}
           scrollbar={{ draggable: true }}

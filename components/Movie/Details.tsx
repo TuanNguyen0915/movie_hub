@@ -1,17 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 import DetailsCard from "./DetailsCard";
-import { getReleaseDate } from "@/actions/getReleaseDate";
-import { ICast, IMovie } from "@/types";
+import { getReleaseDate } from "@/actions/getDate";
+import { ICast, IMovie, IReview } from "@/types";
 import Casts from "./Casts";
-
-
+import Reviews from "./Reviews";
 
 const Details = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [releaseDate, setReleaseDate] = useState("");
   const [casts, setCasts] = useState<ICast[] | []>([]);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<IReview[] | []>([]);
 
   useEffect(() => {
     try {
@@ -50,8 +49,14 @@ const Details = ({ movieId }: { movieId: any }) => {
           `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/reviews`,
           options,
         );
-        const reviewsData = await resReviews.json();
-        setReviews(reviewsData.results);
+        let reviewsData = await resReviews.json();
+        if (reviewsData.results.length > 10) {
+          reviewsData = reviewsData.results.slice(0, 10);
+        } else {
+          reviewsData = reviewsData.results;
+        }
+
+        setReviews(reviewsData);
       };
       fetchData();
     } catch (err) {
@@ -62,16 +67,20 @@ const Details = ({ movieId }: { movieId: any }) => {
     <>
       {movieDetails && (
         <main className="flex flex-col gap-10">
-          <DetailsCard
-            movie={movieDetails}
-            releaseDate={releaseDate}
-          />
+          <DetailsCard movie={movieDetails} releaseDate={releaseDate} />
           {/* CASTS */}
           <div className="w-full">
             <p className="mb-10 mt-4 text-3xl">
               Cast of {movieDetails.name || movieDetails.title}
             </p>
             <Casts casts={casts} />
+          </div>
+          {/* REVIEWS */}
+          <div className="w-full">
+            <p className="mb-10 mt-4 text-3xl">
+              {movieDetails.name || movieDetails.title} Reviews
+              <Reviews reviews={reviews}/>
+            </p>
           </div>
         </main>
       )}
