@@ -15,3 +15,4 @@ export const fetchGenresMovies = async () => {
   }
   return genres;
 };
+

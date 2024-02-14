@@ -8,9 +8,14 @@ import "swiper/css/autoplay";
 import "swiper/css";
 import Image from "next/image";
 
+
 const HeroCard = ({ trending }: { trending: IMovie[] }) => {
+ 
+
   return (
-    <div className="hero-card w-full">
+    <div
+      className="w-full"
+    >
       <Swiper
         autoplay={{ delay: 2000 }}
         slidesPerView={1}
@@ -45,7 +50,7 @@ const HeroCard = ({ trending }: { trending: IMovie[] }) => {
                 }
                 className="flex-1 rounded-lg"
               />
-              <p className="px-4 pb-4 font-semibold duration-500 group-hover:lg:text-xl group-hover:text-red-500">
+              <p className="px-4 pb-4 font-semibold duration-500 group-hover:text-red-500 group-hover:lg:text-xl">
                 {movie.title ||
                   movie.name ||
                   movie.original_title ||

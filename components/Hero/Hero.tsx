@@ -14,11 +14,24 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "swiper/css";
 import HeroCard from "./HeroCard";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-const Hero = async () => {
-  const trending = await fetchTrendingMovies();
+const Hero = () => {
+  const [trending, setTrending] = useState([])
+  useEffect(()=> {
+    try {
+      const fetchData = async () => {
+        const data = await fetchTrendingMovies()
+        setTrending(data)
+      }
+      fetchData()
+    } catch (error) {
+      toast.error('something wrong')
+    }
+  }, [])
   return (
-    <section className="w-full relative">
+    <section className="relative w-full">
       <Swiper
         autoplay={{ delay: 4000 }}
         slidesPerView={1}
@@ -69,7 +82,7 @@ const Hero = async () => {
         ))}
       </Swiper>
       {/* SMALL MOVIE LIST */}
-      <div className="absolute lg:bottom-14 bottom-5 z-40 w-full hidden lg:block">
+      <div className="absolute bottom-5 z-40 hidden w-full lg:bottom-14 lg:block">
         <HeroCard trending={trending.slice(0, 10)} />
       </div>
     </section>
