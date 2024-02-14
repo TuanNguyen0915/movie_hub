@@ -13,11 +13,11 @@ import MovieCard from "./MovieCard";
 const MovieByGenre = ({ movies }: { movies: IMovie[] }) => {
   return (
     <div className="w-full">
-      <div className="hidden md:flex">
+      <div className="hidden lg:flex">
         <Swiper
           autoplay={{ delay: 4000 }}
           spaceBetween={30}
-          slidesPerView={5}
+          slidesPerView={4}
           scrollbar={{ draggable: true }}
           navigation={true}
           modules={[Pagination, Navigation, Autoplay]}
@@ -30,14 +30,31 @@ const MovieByGenre = ({ movies }: { movies: IMovie[] }) => {
         </Swiper>
       </div>
       {/* MOBILE VIEW */}
-      <div className="flex md:hidden">
+      <div className="flex max-sm:hidden lg:hidden">
         <Swiper
-          autoplay={{ delay: 2000 }}
+          // autoplay={{ delay: 2000 }}
           spaceBetween={30}
-          slidesPerView={1}
+          slidesPerView={'auto'}
           scrollbar={{ draggable: true }}
           navigation={true}
-          modules={[Pagination, Navigation, Autoplay]}
+          modules={[Pagination, Navigation]}
+        >
+          {movies.map((movie) => (
+            <SwiperSlide key={movie.id}>
+              <MovieCard movie={movie} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      {/* MOBILE VIEW */}
+      <div className="flex md:hidden">
+        <Swiper
+          // autoplay={{ delay: 2000 }}
+          spaceBetween={30}
+          slidesPerView={'auto'}
+          scrollbar={{ draggable: true }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>

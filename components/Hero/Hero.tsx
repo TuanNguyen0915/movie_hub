@@ -25,7 +25,7 @@ const Hero = async () => {
       {selectedMovie && (
         <div
           style={{
-            backgroundImage: `url('${movieBackground}')`
+            backgroundImage: `url('${movieBackground}')`,
           }}
           className={`relative h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
         >
@@ -39,7 +39,7 @@ const Hero = async () => {
                     : selectedMovie.name}
                 </p>
               </div>
-              <p className="text-lg text-white duration-500 max-lg:hidden md:w-1/2">
+              <p className=" text-xl text-white duration-500 max-md:hidden md:text-[12px] md:w-1/2">
                 {selectedMovie.overview}
               </p>
               <div className="mt-10 flex w-full gap-4 md:gap-10">
