@@ -12,3 +12,45 @@ html {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.swiper-button-next {
+  color: white;
+}
+.swiper-button-next:hover {
+  color: red;
+}
+.swiper-button-next::after {
+  content: "";
+  color: white;
+}
+.swiper-button-next:hover::after {
+  color: red;
+}
+.swiper-button-next::before {
+  content: "";
+  color: white;
+}
+.swiper-button-next:hover::after{
+  color: red;
+}
+
+.swiper-button-prev {
+  color: white;
+}
+.swiper-button-prev:hover {
+  color: red;
+}
+.swiper-button-prev::after {
+  content: "";
+  color: white;
+}
+.swiper-button-prev:hover::after {
+  color: red;
+}
+.swiper-button-prev::before {
+  content: "";
+  color: white;
+}
+.swiper-button-prev:hover::after{
+  color: red;
+}

@@ -1,8 +1,10 @@
+import { getBlurEffect } from "@/actions/getBlurEffect";
 import {
   fetchTrendingMovies,
   fetchGenresMovies,
 } from "@/actions/getMoviesData";
 import { IMovie } from "@/types";
+import Image from "next/image";
 import {
   IoPlayCircleOutline,
   IoInformationCircleOutline,
@@ -12,17 +14,20 @@ const Hero = async () => {
   const trending = await fetchTrendingMovies();
   const randomNumber = Math.floor(Math.random() * trending?.length);
   const selectedMovie: IMovie = trending[randomNumber];
-  const movieBackground = selectedMovie?.backdrop_path
-    ? selectedMovie.backdrop_path
-    : selectedMovie.poster_path;
+  const movieBackground = `https://image.tmdb.org/t/p/original${
+    selectedMovie?.backdrop_path
+      ? selectedMovie.backdrop_path
+      : selectedMovie.poster_path
+  }`;
+
   return (
     <>
-      {selectedMovie && movieBackground && (
+      {selectedMovie && (
         <div
           style={{
-            backgroundImage: `url('https://image.tmdb.org/t/p/original${movieBackground}')`,
+            backgroundImage: `url('${movieBackground}')`
           }}
-          className={`h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
+          className={`relative h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]`}
         >
           {/* MASK */}
           <div className="absolute z-10 flex h-[40vh] w-full items-center rounded-lg bg-[rgba(0,0,0,0.8)] px-5 md:h-[90vh] md:px-20">
