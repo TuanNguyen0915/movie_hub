@@ -15,11 +15,12 @@ export interface IMovie {
   genre_ids: number[];
   popularity: number;
   release_date: string;
-  videos: {results:[]};
+  videos: { results: [] };
   vote_average: number;
   vote_count: number;
-  production_companies: [{name:string}];
-  spoken_languages:[{english_name:string}]
+  production_companies: [{ name: string }];
+  spoken_languages: [{ english_name: string }];
+  belongs_to_collection?: { id: number };
 }
 
 export interface IGenre {
@@ -42,9 +43,9 @@ export interface IReview {
   id: string;
 }
 export interface IVideo {
-  type:string
-  name:string
-  site:string
-  id:string
-  key:string
+  type: string;
+  name: string;
+  site: string;
+  id: string;
+  key: string;
 }

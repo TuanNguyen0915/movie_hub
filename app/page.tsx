@@ -3,10 +3,10 @@ import Hero from "@/components/Hero/Hero";
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-10 text-white">
+    <main className="flex flex-col gap-10 text-white">
       <Hero />
       <MoviesByGenres />
-    </div>
+    </main>
   );
 };
 

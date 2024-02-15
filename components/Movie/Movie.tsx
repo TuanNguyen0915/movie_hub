@@ -7,7 +7,7 @@ import Reviews from "./Reviews";
 import Videos from "./Videos";
 import Similar from "./Similar";
 
-const Movie = ({ movieId }: { movieId: string | number }) => {
+const Movie = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
@@ -62,48 +62,54 @@ const Movie = ({ movieId }: { movieId: string | number }) => {
   }, [movieId]);
 
   return (
-    <main className="h-full w-full">
+    <main className="flex flex-col">
       {movieDetails && casts && reviews && (
-        <div
-          style={{
-            backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path ? movieDetails.backdrop_path : movieDetails.poster_path})`,
-          }}
-          className="relative mt-10 min-h-screen rounded-lg bg-cover bg-no-repeat"
-        >
-          <div className="absolute top-0 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
-            <DetailsCard
-              movie={movieDetails}
-              trailerKey={trailerKey && trailerKey}
-            />
-            {/* CASTS */}
-            <div className="z-10 w-full">
-              <p className="mb-10 mt-4 text-3xl">
-                Cast of {movieDetails.name || movieDetails.title}
-              </p>
-              <Casts casts={casts} />
+        <div className="relative w-full">
+          <div
+            style={{
+              backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path ? movieDetails.backdrop_path : movieDetails.poster_path})`,
+            }}
+            className="relative h-screen w-full rounded-t-lg bg-cover bg-center bg-no-repeat lg:h-[80vh]"
+          >
+            <div className="absolute z-10 flex h-screen w-full flex-col items-center rounded-t-lg bg-gradient-to-r from-indigo-800/50 via-[rgb(0,0,0,0.75)] to-indigo-800/50 p-10 md:px-20 lg:h-[80vh]">
+              <DetailsCard
+                movie={movieDetails}
+                trailerKey={trailerKey && trailerKey}
+              />
             </div>
-            {/* VIDEOS */}
-            <div className="w-full">
-              <p className="mb-10 mt-4 text-3xl">
-                Watch {movieDetails.name} videos
-              </p>
-              <Videos videos={movieDetails.videos.results} />
-            </div>
-            {/* REVIEWS */}
-            <div className="w-full">
-              <p className="mb-10 mt-4 text-3xl">
-                {movieDetails.name || movieDetails.title} Reviews
-              </p>
-              <Reviews reviews={reviews} />
-            </div>
-            {/* Similar */}
+          </div>
+        </div>
+      )}
+      {movieDetails && (
+        <div className=" w-full rounded-b-lg bg-gradient-to-b from-indigo-950/30 to-indigo-950/60 pb-8">
+          {/* CASTS */}
+          <div className="z-10 w-full">
+            <p className="mb-10 mt-4 text-3xl">
+              Cast of {movieDetails.name || movieDetails.title}
+            </p>
+            <Casts casts={casts} />
+          </div>
+          {/* VIDEOS */}
+          <div className="w-full">
+            <p className="mb-10 mt-4 text-3xl">
+              Watch {movieDetails.name} videos
+            </p>
+            <Videos videos={movieDetails.videos.results} />
+          </div>
+          {/* REVIEWS */}
+          <div className="w-full">
+            <p className="mb-10 mt-4 text-3xl">
+              {movieDetails.name || movieDetails.title} Reviews
+            </p>
+            <Reviews reviews={reviews} />
+          </div>
+          {/* Similar */}
 
-            <div className="w-full">
-              <p className="mb-10 mt-4 text-3xl">
-                {movieDetails.name || movieDetails.title} Similar
-              </p>
-              <Similar movieId={movieDetails.id} />
-            </div>
+          <div className="w-full">
+            <p className="mb-10 mt-4 text-3xl">
+              {movieDetails.name || movieDetails.title} Similar
+            </p>
+            <Similar movieId={movieDetails.id} />
           </div>
         </div>
       )}
