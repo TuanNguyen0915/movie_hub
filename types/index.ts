@@ -15,7 +15,7 @@ export interface IMovie {
   genre_ids: number[];
   popularity: number;
   release_date: string;
-  video: boolean;
+  videos: {results:[]};
   vote_average: number;
   vote_count: number;
   production_companies: [{name:string}];
@@ -40,4 +40,11 @@ export interface IReview {
   content: string;
   created_at: string;
   id: string;
+}
+export interface IVideo {
+  type:string
+  name:string
+  site:string
+  id:string
+  key:string
 }

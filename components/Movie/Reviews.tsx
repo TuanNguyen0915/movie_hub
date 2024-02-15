@@ -1,10 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css/navigation";
+import "swiper/css/autoplay";
 import "swiper/css/scrollbar";
 import "swiper/css";
 import { IReview } from "@/types";
-import { getCreateDate } from "@/actions/getDate";
+
+import Review from "./Review";
 
 const Reviews = ({ reviews }: { reviews: IReview[] }) => {
   return (
@@ -31,24 +33,11 @@ const Reviews = ({ reviews }: { reviews: IReview[] }) => {
         }}
         scrollbar={{ draggable: true }}
         navigation={true}
-        loop
         modules={[Navigation, Autoplay]}
       >
         {reviews.map((review: IReview) => (
           <SwiperSlide key={review.id}>
-            <div className="mx-auto flex h-[300px] w-[300px] flex-col gap-4 rounded-lg bg-slate-400/10 p-4 backdrop-blur-sm">
-              <div>
-                <p className="w-full text-xl font-semibold">{review.author}</p>
-                <p className="w-full text-base italic">
-                  {getCreateDate(review.created_at)}
-                </p>
-              </div>
-              <p className="w-full flex-1  text-sm italic text-gray-200 ">
-                {review.content.length > 350
-                  ? `${review.content.slice(0, 350)} ...`
-                  : review.content}
-              </p>
-            </div>
+            <Review review={review}/>
           </SwiperSlide>
         ))}
       </Swiper>

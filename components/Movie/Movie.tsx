@@ -1,16 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 import DetailsCard from "./DetailsCard";
-import { getReleaseDate } from "@/actions/getDate";
-import { ICast, IMovie, IReview } from "@/types";
+import { ICast, IMovie, IReview, IVideo } from "@/types";
 import Casts from "./Casts";
 import Reviews from "./Reviews";
+import Videos from "./Videos";
 
 const Movie = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
-
+  const [trailerKey, setTrailerKey] = useState('');
   useEffect(() => {
     try {
       const options = {
@@ -28,7 +28,11 @@ const Movie = ({ movieId }: { movieId: any }) => {
         );
         const detailsData = await resData.json();
         setMovieDetails(detailsData);
-
+        const videos = detailsData.videos.results;
+        const trailer = videos.find(
+          (video: IVideo) => video.type === "Trailer",
+        );
+        setTrailerKey(trailer.key)
         //get casts
         const resCasts = await fetch(
           `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/credits`,
@@ -55,7 +59,6 @@ const Movie = ({ movieId }: { movieId: any }) => {
       console.log(err);
     }
   }, [movieId]);
-
   return (
     <main className="h-full w-full">
       {movieDetails && (
@@ -65,10 +68,17 @@ const Movie = ({ movieId }: { movieId: any }) => {
           }}
           className="relative mt-10 min-h-screen rounded-lg bg-cover bg-no-repeat"
         >
-          <div className="absolute top-0 z-10 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
-            <DetailsCard movie={movieDetails} />
-            {/* CASTS */}
+          <div className="absolute top-0 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
+            <DetailsCard movie={movieDetails} trailerKey={trailerKey}/>
+            {/* VIDEOS */}
             <div className="w-full">
+              <p className="mb-10 mt-4 text-3xl">
+                Watch {movieDetails.name} videos
+              </p>
+              <Videos videos={movieDetails.videos.results} />
+            </div>
+            {/* CASTS */}
+            <div className="z-10 w-full">
               <p className="mb-10 mt-4 text-3xl">
                 Cast of {movieDetails.name || movieDetails.title}
               </p>
@@ -78,8 +88,8 @@ const Movie = ({ movieId }: { movieId: any }) => {
             <div className="w-full">
               <p className="mb-10 mt-4 text-3xl">
                 {movieDetails.name || movieDetails.title} Reviews
-                <Reviews reviews={reviews} />
               </p>
+              <Reviews reviews={reviews} />
             </div>
           </div>
         </div>

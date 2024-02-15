@@ -15,23 +15,23 @@ const MoviesEachGenre = ({ movies }: { movies: IMovie[] }) => {
       <div className="flex">
         <Swiper
           loop
-          slidesPerView={1}
+          slidesPerView={1.5}
           spaceBetween={10}
           breakpoints={{
             932: {
-              slidesPerView: 2,
+              slidesPerView: 2.5,
               spaceBetween: 10,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 3.5,
               spaceBetween: 10,
             },
             1366: {
-              slidesPerView: 4,
+              slidesPerView: 4.5,
               spaceBetween: 20,
             },
             1688: {
-              slidesPerView: 5,
+              slidesPerView: 5.5,
               spaceBetween: 20,
             }
           }}

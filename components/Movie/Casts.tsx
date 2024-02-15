@@ -34,9 +34,7 @@ const Casts = ({ casts }: { casts: ICast[] }) => {
                 <Image
                   src={`https://image.tmdb.org/t/p/w400/${cast.profile_path}`}
                   alt={cast.name}
-                  // width={200}
-                  // height={200}
-                  // className="rounded-full object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   fill
                   className="rounded-full"
                 />

@@ -18,15 +18,15 @@ const HeroCard = ({ trending }: { trending: IMovie[] }) => {
     >
       <Swiper
         autoplay={{ delay: 2000 }}
-        slidesPerView={1}
+        slidesPerView={1.5}
         spaceBetween={10}
         breakpoints={{
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 3.5,
             spaceBetween: 50,
           },
           1366: {
-            slidesPerView: 5,
+            slidesPerView: 5.5,
             spaceBetween: 50,
           },
         }}

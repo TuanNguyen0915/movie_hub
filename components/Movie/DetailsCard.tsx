@@ -1,17 +1,18 @@
 "use client";
 import { IMovie } from "@/types";
 import Image from "next/image";
-
+import { useState } from "react";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoPlayCircleOutline } from "react-icons/io5";
 
-const DetailsCard = ({ movie }: { movie: IMovie }) => {
-  const backgroundURL = `https://image.tmdb.org/t/p/original${
-    movie?.backdrop_path ? movie.backdrop_path : movie.poster_path
-  }`;
-  let webLink = movie.homepage
-    ? movie.homepage.split("https://")[1]
-    : "not available";
-  // webLink = webLink.length > 20 ? `${webLink.slice(0, 20)}...` : webLink;
+interface IProps {
+  movie: IMovie;
+  trailerKey: string;
+}
+
+const DetailsCard = ({ movie, trailerKey }: IProps) => {
+  const [playTrailer, setPlayTrailer] = useState(false);
+
   return (
     <div className="flex flex-col md:flex-row lg:h-[70vh] lg:gap-10 lg:p-8 xl:p-16">
       <div className="relative h-[200px] w-[200px] md:h-[300px] md:w-[300p] lg:h-[400px] lg:w-[400px] xl:h-[600px] xl:w-[600px]">
@@ -47,46 +48,65 @@ const DetailsCard = ({ movie }: { movie: IMovie }) => {
             ( {movie.vote_count} votes ){" "}
           </span>
         </p>
-        {/* <p className="w-full">
-          Website:{" "}
-          <a
-            href={movie.homepage}
-            target="_blank"
-            className="w-full text-red-300 duration-300 hover:text-red-500"
-          >
-            {webLink}
-          </a>
-        </p> */}
         <div className="flex w-full items-center gap-10 lg:w-1/2">
           <button className="flex items-center justify-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
             <IoPlayCircleOutline className="scale-[2]" />
             <p>Play Movie</p>
           </button>
-          <button className="flex items-center justify-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
+          <button
+            className="flex items-center justify-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg"
+            onClick={() => {
+              setPlayTrailer(true);
+            }}
+          >
             <IoPlayCircleOutline className="scale-[2]" />
             <p>Play Trailer</p>
           </button>
         </div>
         <p className="w-full">{movie.overview}</p>
         <div className="w-full">
-          <div className="flex items-center">
-            <p className="text-gray-400 min-w-[150px]">Languages</p>
-            <div className="flex w-full gap-4">
+          <div className="flex items-center max-lg:flex-col">
+            <p className="min-w-[150px] text-gray-400">Languages</p>
+            <div className="flex w-full gap-4 flex-wrap">
               {movie.spoken_languages.map((language) => (
-                <p>{language.english_name}</p>
+                <p key={language.english_name}>{language.english_name}</p>
               ))}
             </div>
           </div>
-          <div className="flex items-center">
-            <p className="text-gray-400 min-w-[150px]">Studios</p>
-            <div className="flex w-full gap-4">
+          <div className="flex items-center max-lg:flex-col">
+            <p className="min-w-[150px] text-gray-400">Studios</p>
+            <div className="flex w-full gap-4 flex-wrap">
               {movie.production_companies.map((language) => (
-                <p>{language.name}</p>
+                <p key={language.name}>{language.name}</p>
               ))}
             </div>
           </div>
         </div>
       </div>
+      {playTrailer && (
+        <div className="fixed bottom-0 left-0 right-0 top-0 z-20 mx-auto bg-[rgba(0,0,0,.8)]"
+        onClick={()=>{setPlayTrailer(false)}}
+        >
+          <div className="flex w-full items-center justify-center">
+            <div className="mt-40 flex h-full w-full flex-col gap-5 lg:h-[500px] lg:w-[500px]">
+              <div className="w-full flex justify-end">
+                <IoIosCloseCircleOutline
+                  className="scale-[2] text-end text-red-500"
+                  onClick={() => {
+                    setPlayTrailer(false);
+                  }}
+                />
+              </div>
+              <iframe className="lg:w-[629px] lg:h-[515px] w-full h-[50vh] "
+                allowFullScreen
+                // width="620"
+                // height="515"
+                src={`https://www.youtube.com/embed/${trailerKey}`}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
