@@ -5,8 +5,9 @@ import { ICast, IMovie, IReview, IVideo } from "@/types";
 import Casts from "./Casts";
 import Reviews from "./Reviews";
 import Videos from "./Videos";
+import Similar from "./Similar";
 
-const Movie = ({ movieId }: { movieId: any }) => {
+const Movie = ({ movieId }: { movieId: string | number }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
@@ -32,7 +33,7 @@ const Movie = ({ movieId }: { movieId: any }) => {
         const trailer = videos.find(
           (video: IVideo) => video.type === "Trailer",
         );
-        if(trailer) setTrailerKey(trailer.key);
+        if (trailer) setTrailerKey(trailer.key);
         //get casts
         const resCasts = await fetch(
           `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/credits`,
@@ -59,6 +60,7 @@ const Movie = ({ movieId }: { movieId: any }) => {
       console.log(err);
     }
   }, [movieId]);
+
   return (
     <main className="h-full w-full">
       {movieDetails && casts && reviews && (
@@ -69,7 +71,10 @@ const Movie = ({ movieId }: { movieId: any }) => {
           className="relative mt-10 min-h-screen rounded-lg bg-cover bg-no-repeat"
         >
           <div className="absolute top-0 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
-            <DetailsCard movie={movieDetails} trailerKey={trailerKey && trailerKey} />
+            <DetailsCard
+              movie={movieDetails}
+              trailerKey={trailerKey && trailerKey}
+            />
             {/* CASTS */}
             <div className="z-10 w-full">
               <p className="mb-10 mt-4 text-3xl">
@@ -90,6 +95,14 @@ const Movie = ({ movieId }: { movieId: any }) => {
                 {movieDetails.name || movieDetails.title} Reviews
               </p>
               <Reviews reviews={reviews} />
+            </div>
+            {/* Similar */}
+
+            <div className="w-full">
+              <p className="mb-10 mt-4 text-3xl">
+                {movieDetails.name || movieDetails.title} Similar
+              </p>
+              <Similar movieId={movieDetails.id} />
             </div>
           </div>
         </div>

@@ -15,3 +15,8 @@ export const fetchGenresMovies = async () => {
   }
   return genres;
 };
+
+export const getSimilar = async (collectionId: string | number) => {
+  const data = await getMoviesApi(`movie/${collectionId}/similar?language=en-US&page=1`);
+  return data.results;
+};
