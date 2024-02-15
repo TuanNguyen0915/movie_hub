@@ -1,7 +1,7 @@
 "use client";
 import { IMovie } from "@/types";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination} from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
@@ -14,17 +14,26 @@ const MoviesEachGenre = ({ movies }: { movies: IMovie[] }) => {
     <div className="w-full">
       <div className="flex">
         <Swiper
-          slidesPerView={2}
+          loop
+          slidesPerView={1}
           spaceBetween={10}
           breakpoints={{
+            932: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
             1024: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               spaceBetween: 10,
             },
             1366: {
-              slidesPerView: 6,
+              slidesPerView: 4,
               spaceBetween: 20,
             },
+            1688: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            }
           }}
           scrollbar={{ draggable: true }}
           navigation={true}

@@ -21,9 +21,13 @@ const Reviews = ({ reviews }: { reviews: IReview[] }) => {
             spaceBetween: 10,
           },
           1366: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 10,
           },
+          1688: {
+            slidesPerView: 5,
+            spaceBetween: 10,
+          }
         }}
         scrollbar={{ draggable: true }}
         navigation={true}

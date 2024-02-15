@@ -50,7 +50,7 @@ const HeroCard = ({ trending }: { trending: IMovie[] }) => {
                 }
                 className="flex-1 rounded-lg"
               />
-              <p className="px-4 pb-4 font-semibold duration-500 group-hover:text-red-500 group-hover:lg:text-xl">
+              <p className="px-4 pb-4 font-semibold duration-500 group-hover:text-red-500 group-hover:lg:text-xl hidden">
                 {movie.title ||
                   movie.name ||
                   movie.original_title ||

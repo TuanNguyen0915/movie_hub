@@ -6,9 +6,8 @@ import { ICast, IMovie, IReview } from "@/types";
 import Casts from "./Casts";
 import Reviews from "./Reviews";
 
-const Details = ({ movieId }: { movieId: any }) => {
+const Movie = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
-  const [releaseDate, setReleaseDate] = useState("");
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
 
@@ -29,14 +28,7 @@ const Details = ({ movieId }: { movieId: any }) => {
         );
         const detailsData = await resData.json();
         setMovieDetails(detailsData);
-        // get releaseDate
-        const resRelease = await fetch(
-          `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/release_dates`,
-          options,
-        );
-        const dateData = await resRelease.json();
-        const formatDate = getReleaseDate(dateData);
-        setReleaseDate(formatDate.toString());
+
         //get casts
         const resCasts = await fetch(
           `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/credits`,
@@ -63,29 +55,37 @@ const Details = ({ movieId }: { movieId: any }) => {
       console.log(err);
     }
   }, [movieId]);
+
   return (
-    <>
+    <main className="h-full w-full">
       {movieDetails && (
-        <main className="flex flex-col gap-10">
-          <DetailsCard movie={movieDetails} releaseDate={releaseDate} />
-          {/* CASTS */}
-          <div className="w-full">
-            <p className="mb-10 mt-4 text-3xl">
-              Cast of {movieDetails.name || movieDetails.title}
-            </p>
-            <Casts casts={casts} />
+        <div
+          style={{
+            backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path ? movieDetails.backdrop_path : movieDetails.poster_path})`,
+          }}
+          className="relative mt-10 min-h-screen rounded-lg bg-cover bg-no-repeat"
+        >
+          <div className="absolute top-0 z-10 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
+            <DetailsCard movie={movieDetails} />
+            {/* CASTS */}
+            <div className="w-full">
+              <p className="mb-10 mt-4 text-3xl">
+                Cast of {movieDetails.name || movieDetails.title}
+              </p>
+              <Casts casts={casts} />
+            </div>
+            {/* REVIEWS */}
+            <div className="w-full">
+              <p className="mb-10 mt-4 text-3xl">
+                {movieDetails.name || movieDetails.title} Reviews
+                <Reviews reviews={reviews} />
+              </p>
+            </div>
           </div>
-          {/* REVIEWS */}
-          <div className="w-full">
-            <p className="mb-10 mt-4 text-3xl">
-              {movieDetails.name || movieDetails.title} Reviews
-              <Reviews reviews={reviews}/>
-            </p>
-          </div>
-        </main>
+        </div>
       )}
-    </>
+    </main>
   );
 };
 
-export default Details;
+export default Movie;

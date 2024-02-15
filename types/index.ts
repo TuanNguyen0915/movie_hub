@@ -1,9 +1,11 @@
 export interface IMovie {
+  homepage: string;
   adult: boolean;
   backdrop_path: string;
   id: number;
   title: string;
   name: string;
+  genres: any[];
   original_language: string;
   original_title: string;
   original_name: string;
@@ -16,6 +18,8 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  production_companies: [{name:string}];
+  spoken_languages:[{english_name:string}]
 }
 
 export interface IGenre {

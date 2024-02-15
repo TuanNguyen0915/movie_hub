@@ -1,15 +1,11 @@
 "use client";
-import Details from "@/components/Movie/Details";
+import Details from "@/components/Movie/Movie";
 import { useParams } from "next/navigation";
 import React from "react";
 
 const MoviePage = () => {
   const { movieId } = useParams();
-  return (
-    <div className="w-full">
-      <Details movieId={movieId} />
-    </div>
-  );
+  return <Details movieId={movieId} />;
 };
 
 export default MoviePage;

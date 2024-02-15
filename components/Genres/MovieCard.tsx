@@ -23,7 +23,7 @@ const MovieCard = ({ movie }: { movie: IMovie }) => {
           alt="movie poster"
           className="flex-1 rounded-lg"
         />
-        <p className="px-4 pb-2 duration-500 group-hover:font-semibold group-hover:text-red-500">
+        <p className="px-4 pb-2 duration-500 group-hover:font-semibold group-hover:text-red-500 max-md:hidden">
           {movie.name || movie.title}
         </p>
       </Link>
