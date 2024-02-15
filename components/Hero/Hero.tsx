@@ -16,20 +16,21 @@ import "swiper/css";
 import HeroCard from "./HeroCard";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const Hero = () => {
-  const [trending, setTrending] = useState([])
-  useEffect(()=> {
+  const [trending, setTrending] = useState([]);
+  useEffect(() => {
     try {
       const fetchData = async () => {
-        const data = await fetchTrendingMovies()
-        setTrending(data)
-      }
-      fetchData()
+        const data = await fetchTrendingMovies();
+        setTrending(data);
+      };
+      fetchData();
     } catch (error) {
-      toast.error('something wrong')
+      toast.error("something wrong");
     }
-  }, [])
+  }, []);
   return (
     <section className="relative w-full">
       <Swiper
@@ -53,7 +54,7 @@ const Hero = () => {
             >
               {/* MASK */}
               <div className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.6)] px-5 md:h-[90vh] md:px-20">
-                <div className="group flex w-full flex-1 flex-col md:justify-center max-md:mt-10">
+                <div className="group flex w-full flex-1 flex-col max-md:mt-10 md:justify-center">
                   <div className="h-[100px]">
                     <p className="flex items-center text-3xl text-red-500 duration-500 md:text-5xl md:group-hover:text-7xl">
                       {movie.title ||
@@ -62,8 +63,10 @@ const Hero = () => {
                         movie.original_name}
                     </p>
                   </div>
-                  <p className=" text-sm text-white duration-500 max-lg:hidden 2xl:w-1/2 md:text-xl">
-                    {movie.overview.length > 200 ? `${movie.overview.slice(0,200)}...`:movie.overview}
+                  <p className=" text-sm text-white duration-500 max-lg:hidden md:text-xl 2xl:w-1/2">
+                    {movie.overview.length > 200
+                      ? `${movie.overview.slice(0, 200)}...`
+                      : movie.overview}
                   </p>
                   <div className="mt-10 flex w-full gap-4 md:gap-10">
                     <button className="flex min-w-[100px] items-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
@@ -72,7 +75,9 @@ const Hero = () => {
                     </button>
                     <button className="flex min-w-[100px] items-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
                       <IoInformationCircleOutline className="scale-[2]" />
-                      <p>More Info</p>
+                      <Link href="/movies/[movieId]" as={`/movies/${movie.id}`}>
+                        <p>More Info</p>
+                      </Link>
                     </button>
                   </div>
                 </div>

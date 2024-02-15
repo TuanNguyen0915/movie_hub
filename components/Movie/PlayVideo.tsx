@@ -24,6 +24,7 @@ const PlayVideo = ({ setOpenVideo, selectedKey }: IProps) => {
           allowFullScreen
           width="620"
           height="515"
+          loading="lazy"
           src={`https://www.youtube.com/embed/${selectedKey}`}
         />
       </div>

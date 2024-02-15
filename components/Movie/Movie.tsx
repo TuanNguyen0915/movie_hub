@@ -10,7 +10,7 @@ const Movie = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
-  const [trailerKey, setTrailerKey] = useState('');
+  const [trailerKey, setTrailerKey] = useState("");
   useEffect(() => {
     try {
       const options = {
@@ -32,7 +32,7 @@ const Movie = ({ movieId }: { movieId: any }) => {
         const trailer = videos.find(
           (video: IVideo) => video.type === "Trailer",
         );
-        setTrailerKey(trailer.key)
+        if(trailer) setTrailerKey(trailer.key);
         //get casts
         const resCasts = await fetch(
           `${process.env.NEXT_PUBLIC_TMDB_URL}/movie/${movieId}/credits`,
@@ -61,7 +61,7 @@ const Movie = ({ movieId }: { movieId: any }) => {
   }, [movieId]);
   return (
     <main className="h-full w-full">
-      {movieDetails && (
+      {movieDetails && casts && reviews && (
         <div
           style={{
             backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path ? movieDetails.backdrop_path : movieDetails.poster_path})`,
@@ -69,20 +69,20 @@ const Movie = ({ movieId }: { movieId: any }) => {
           className="relative mt-10 min-h-screen rounded-lg bg-cover bg-no-repeat"
         >
           <div className="absolute top-0 flex min-h-screen w-full flex-col gap-5 rounded-lg bg-gradient-to-r from-indigo-800/30 via-[rgb(0,0,0,0.7)] to-indigo-800/30  p-4 backdrop-blur-[1px]">
-            <DetailsCard movie={movieDetails} trailerKey={trailerKey}/>
-            {/* VIDEOS */}
-            <div className="w-full">
-              <p className="mb-10 mt-4 text-3xl">
-                Watch {movieDetails.name} videos
-              </p>
-              <Videos videos={movieDetails.videos.results} />
-            </div>
+            <DetailsCard movie={movieDetails} trailerKey={trailerKey && trailerKey} />
             {/* CASTS */}
             <div className="z-10 w-full">
               <p className="mb-10 mt-4 text-3xl">
                 Cast of {movieDetails.name || movieDetails.title}
               </p>
               <Casts casts={casts} />
+            </div>
+            {/* VIDEOS */}
+            <div className="w-full">
+              <p className="mb-10 mt-4 text-3xl">
+                Watch {movieDetails.name} videos
+              </p>
+              <Videos videos={movieDetails.videos.results} />
             </div>
             {/* REVIEWS */}
             <div className="w-full">

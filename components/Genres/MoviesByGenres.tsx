@@ -5,7 +5,7 @@ import MoviesEachGenre from "./MoviesEachGenre";
 
 const MoviesByGenres = async () => {
   const moviesByGenres = await fetchGenresMovies();
-
+  
   return (
     <div className="mt-10 flex w-full flex-col gap-20 px-4">
       {moviesByGenres.map((genre: IGenre) => (
