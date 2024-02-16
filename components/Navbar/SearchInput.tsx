@@ -7,12 +7,11 @@ const SearchInput = () => {
   const router = useRouter();
   const [dropSearch, setDropSearch] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault()
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     router.push(`/search/${searchTerm}`);
     setSearchTerm("");
   };
-
   return (
     <form
       className="group relative flex items-center justify-center gap-4"
@@ -33,11 +32,12 @@ const SearchInput = () => {
       {/* MOBILE VIEW */}
       {dropSearch && (
         <input
+          required
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           type="text"
           placeholder="Search Movie ..."
-          className="absolute top-16 z-10 min-w-full rounded-lg bg-black/80 p-4 opacity-50 outline-none backdrop-blur-lg duration-500 group-hover:opacity-100 lg:hidden"
+          className="absolute top-16 z-10 min-w-full rounded-lg bg-black/80 p-4 opacity-50 outline-none backdrop-blur-lg duration-500 group-hover:opacity-100 lg:hidden"   
         />
       )}
     </form>

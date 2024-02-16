@@ -1,7 +1,6 @@
 "use client";
 
 import { fetchSearchMovie } from "@/actions/getMoviesData";
-import HeroCard from "@/components/Hero/HeroCard";
 import { IMovie } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +18,28 @@ const Search = () => {
     fetchData();
   }, [searchTerm]);
 
+  if (searchMovies?.length === 0) {
+    return (
+      <div className="flex h-[80vh] w-full flex-col items-center justify-center gap-10">
+        <p className="text-2xl font-bold text-red-500 md:text-5xl xl:text-7xl">
+          Sorry !!!
+        </p>
+        <p className="tex-xl text-white lg:text-3xl">
+          We dont have data for{" "}
+          <span className="text-red-500">{searchTerm}</span>
+        </p>
+        <p className="tex-xl text-white lg:text-3xl">
+          Back to{" "}
+          <Link
+            href="/"
+            className="cursor-pointer text-red-500 duration-500 hover:text-red-300"
+          >
+            Home
+          </Link>
+        </p>
+      </div>
+    );
+  }
   return (
     <main>
       {searchMovies && (

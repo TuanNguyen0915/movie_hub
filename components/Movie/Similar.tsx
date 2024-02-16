@@ -14,7 +14,6 @@ const Similar = ({movieId }: { movieId: number | any }) => {
     fetchData();
   }, [movieId]);
 
-  console.log(movies)
   return (
     <>
     {movies && <HeroCard trending={movies}/>}

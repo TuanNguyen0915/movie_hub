@@ -2,8 +2,11 @@
 import Link from "next/link";
 import SearchInput from "./SearchInput";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+
 
 const Navbar = () => {
+  const pathname = usePathname()
   const [dropDownMenu, setDropDownMenu] = useState<boolean>(false);
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
@@ -38,13 +41,14 @@ const Navbar = () => {
       <div className="hidden items-center gap-10 lg:flex">
         <Link
           href="/"
-          className="text-xl font-semibold duration-700 hover:text-red-500"
+          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === '/'?'text-red-500':''}`}
         >
           Home
         </Link>
         <Link
           href="/my-list"
-          className="text-xl font-semibold duration-700 hover:text-red-500"
+          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === '/my-list'?'text-red-500':''}`}
+
         >
           My List
         </Link>
