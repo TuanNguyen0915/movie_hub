@@ -1,8 +1,9 @@
 "use client";
 import { IMovie } from "@/types/types";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoPlayCircleOutline } from "react-icons/io5";
 
@@ -11,8 +12,38 @@ interface IProps {
   trailerKey: string;
 }
 
+interface IUser {
+  email: string;
+  username: string;
+  password: string;
+  favoriteMovies: number[];
+}
+
 const DetailsCard = ({ movie, trailerKey }: IProps) => {
-  const [playTrailer, setPlayTrailer] = useState(false);
+  const { data: session } = useSession();
+  const [user, setUser] = useState<IUser | {}>();
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [playTrailer, setPlayTrailer] = useState<boolean>(false);
+
+  const getUser = async () => {
+    try {
+      const res = await fetch(`/api/user/${session?.user?.email}`);
+      const data = await res.json();
+      setUser(data);
+      if (data.favoriteMovies.includes(movie.id)) {
+        setIsFavorite(true);
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (session) {
+      getUser();
+    }
+  }, [session]);
 
   return (
     <div className="flex flex-col items-center justify-center md:flex-row lg:h-[70vh] lg:gap-10 lg:p-8 xl:p-16">
@@ -97,6 +128,11 @@ const DetailsCard = ({ movie, trailerKey }: IProps) => {
             </div>
           </div>
         </div>
+        {!isFavorite && (
+          <button className="flex w-1/2 flex-wrap items-center justify-center gap-4 rounded-lg bg-red-500 px-4 py-2 font-semibold duration-500 hover:bg-white/50  md:px-8 md:py-4 md:text-lg">
+            Add to play list
+          </button>
+        )}
       </div>
       {playTrailer && (
         <div

@@ -1,7 +1,10 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "react-hot-toast";
+import AuthProvider from "@/context/AuthProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,10 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${inter.className} max-w-[2160px] bg-[#131116] mx-auto w-full px-4 text-white`}
+        className={`${inter.className} mx-auto w-full max-w-[2160px] bg-[#131116] px-4 text-white`}
       >
-        <Toaster />
-        <div className="flex-1">{children}</div>
+        <AuthProvider>
+          <Toaster />
+          <div className="flex-1">{children}</div>
+        </AuthProvider>
       </body>
     </html>
   );

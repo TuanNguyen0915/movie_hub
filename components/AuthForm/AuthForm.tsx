@@ -136,7 +136,10 @@ const AuthForm = ({ type }: { type: "register" | "login" }) => {
             {errors.password.message}
           </p>
         )}
-        <button className="w-full rounded-xl border border-red-500 bg-red-500 p-4 text-xl text-white duration-500 hover:bg-transparent lg:w-3/4">
+        <button
+          disabled={isLoading}
+          className={`w-full rounded-xl border border-red-500 bg-red-500 p-4 text-xl text-white duration-500 hover:bg-transparent lg:w-3/4 ${isLoading ? "disabled:opacity-50" : ""}`}
+        >
           {isLoading
             ? "Loading..."
             : type === "register"

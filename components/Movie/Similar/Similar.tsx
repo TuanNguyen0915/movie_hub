@@ -1,8 +1,8 @@
 "use client";
 import { getSimilar } from "@/actions/getMoviesData";
+import HeroCard from "@/components/Hero/HeroCard";
 import { IMovie } from "@/types/types";
 import React, { useEffect, useState } from "react";
-import HeroCard from "../Hero/HeroCard";
 
 const Similar = ({ movieId }: { movieId: number | any }) => {
   const [movies, setMovies] = useState<IMovie[]>();

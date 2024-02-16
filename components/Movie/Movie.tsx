@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import DetailsCard from "./DetailsCard";
 import { ICast, IMovie, IReview, IVideo } from "@/types/types";
-import Casts from "./Casts";
-import Reviews from "./Reviews";
-import Videos from "./Videos";
-import Similar from "./Similar";
+import Casts from "./Casts/Casts";
+import Reviews from "./Reviews/Reviews";
+import Videos from "./Videos/Videos";
+import Similar from "./Similar/Similar";
 
 const Movie = ({ movieId }: { movieId: any }) => {
   const [movieDetails, setMovieDetails] = useState<IMovie>();
