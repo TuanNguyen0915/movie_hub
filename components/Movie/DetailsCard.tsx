@@ -37,8 +37,11 @@ const DetailsCard = ({ movie, trailerKey }: IProps) => {
           {movie.title || movie.name || movie.original_title}
         </p>
 
-        <p>{movie.release_date.split("-")[0]}</p>
-        <div className="flex items-center gap-4 flex-wrap">
+        <p>
+          Release Date:
+          <span className=" ml-4 font-semibold">{movie.release_date} </span>
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
           {movie.genres.map((genre) => (
             <Link
               key={genre.id}
@@ -71,7 +74,11 @@ const DetailsCard = ({ movie, trailerKey }: IProps) => {
             <p>Play Trailer</p>
           </button>
         </div>
-        <p className="w-full">{movie.overview}</p>
+        <p className="w-full">
+          {movie.overview.length > 250
+            ? `${movie.overview.slice(0, 250)}...`
+            : movie.overview}
+        </p>
         <div className="w-full">
           <div className="flex items-center max-lg:flex-col">
             <p className="min-w-[150px] text-gray-300">Languages</p>

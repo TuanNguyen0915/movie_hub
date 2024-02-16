@@ -17,6 +17,13 @@ export const fetchGenresMovies = async () => {
 };
 
 export const getSimilar = async (collectionId: string | number) => {
-  const data = await getMoviesApi(`movie/${collectionId}/similar?language=en-US&page=1`);
+  const data = await getMoviesApi(
+    `movie/${collectionId}/similar?language=en-US&page=1`,
+  );
   return data.results;
+};
+
+export const fetchSearchMovie = async (searchTerm: string | string[]) => {
+  const data = await getMoviesApi(`search/movie?query=${searchTerm}&language=en-US&page=1`)
+  return data.results
 };

@@ -32,7 +32,7 @@ const HeroCard = ({ trending }: { trending: IMovie[] }) => {
         {trending.map((movie) => (
           <SwiperSlide key={movie.id}>
             <Link href="/movies/[movieId]" as={`/movies/${movie.id}`}>
-              <div className="group mx-auto flex h-[150px] w-[150px] flex-col justify-between gap-10 rounded-lg border border-transparent hover:border-white 2xl:h-[300px] 2xl:w-[300px]">
+              <div className="mx-auto flex h-[150px] w-[150px] flex-col justify-between gap-10 rounded-lg border border-transparent hover:border-white 2xl:h-[300px] 2xl:w-[300px]">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${
                     movie?.backdrop_path
@@ -49,7 +49,7 @@ const HeroCard = ({ trending }: { trending: IMovie[] }) => {
                   }
                   className="flex-1 rounded-lg"
                 />
-                <p className="hidden px-4 pb-4 font-semibold duration-500 group-hover:text-red-500 group-hover:lg:text-xl">
+                <p className="px-4 pb-4 font-semibold duration-500 group-hover:text-red-500 group-hover:lg:text-xl">
                   {movie.title ||
                     movie.name ||
                     movie.original_title ||
