@@ -81,12 +81,6 @@ const Hero = () => {
                         <p>More Info</p>
                       </Link>
                     </button>
-                    <button className="flex min-w-[100px] items-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
-                      <IoInformationCircleOutline className="scale-[2]" />
-                      <Link href="/movies/[movieId]" as={`/movies/${movie.id}`}>
-                        <p>More Info</p>
-                      </Link>
-                    </button>
                   </div>
                 </div>
               </div>
