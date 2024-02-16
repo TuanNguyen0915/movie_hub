@@ -76,14 +76,14 @@ const Movie = ({ movieId }: { movieId: any }) => {
   return (
     <main className="flex flex-col">
       {movieDetails && casts && reviews && (
-        <div className="relative w-full">
+        <div className="relative w-full md:h-screen">
           <div
             style={{
               backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.backdrop_path ? movieDetails.backdrop_path : movieDetails.poster_path})`,
             }}
-            className="relative h-screen w-full rounded-t-lg bg-cover bg-center bg-no-repeat lg:h-[80vh]"
+            className="relative h-screen w-full rounded-t-lg bg-cover bg-center bg-no-repeat xl:h-[80vh]"
           >
-            <div className="absolute z-10 flex h-screen w-full flex-col items-center rounded-t-lg bg-gradient-to-r from-indigo-800/50 via-[rgb(0,0,0,0.75)] to-indigo-800/50 p-10 md:px-20 lg:h-[80vh]">
+            <div className="absolute z-10 flex h-screen w-full flex-col items-center rounded-t-lg bg-gradient-to-r from-indigo-800/50 via-[rgb(0,0,0,0.75)] to-indigo-800/50 p-10 md:px-20 xl:h-[80vh]">
               <DetailsCard
                 movie={movieDetails}
                 trailerKey={trailerKey && trailerKey}
