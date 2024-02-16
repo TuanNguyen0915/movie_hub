@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${inter.className} mx-auto flex w-full max-w-[2160px] flex-col bg-[#131116] px-4 text-white`}
+        className={`${inter.className} mx-auto flex w-full min-h-screen max-w-[2160px] flex-col bg-[#131116] px-4 text-white`}
       >
         <AuthProvider>
           <Navbar />
