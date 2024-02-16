@@ -3,7 +3,6 @@ import { fetchTrendingMovies } from "@/actions/getMoviesData";
 import { IMovie } from "@/types/types";
 
 import {
-  IoPlayCircleOutline,
   IoInformationCircleOutline,
 } from "react-icons/io5";
 
@@ -19,7 +18,6 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 
 const Hero = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [trending, setTrending] = useState([]);
   useEffect(() => {
     try {

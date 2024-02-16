@@ -3,6 +3,7 @@ import { IMovie } from "@/types/types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoPlayCircleOutline } from "react-icons/io5";
@@ -15,36 +16,61 @@ interface IProps {
 interface IUser {
   email: string;
   username: string;
-  password: string;
   favoriteMovies: number[];
 }
 
 const DetailsCard = ({ movie, trailerKey }: IProps) => {
-  const { data: session } = useSession();
-  const [user, setUser] = useState<IUser | {}>();
+  const router = useRouter();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [user, setUser] = useState<IUser | {}>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [playTrailer, setPlayTrailer] = useState<boolean>(false);
 
-  const getUser = async () => {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      try {
+        const getUser = async () => {
+          const res = await fetch(`/api/user/${session?.user?.email}`);
+          const data = await res.json();
+          setUser(data);
+          if (data.favoriteMovies.includes(movie.id)) {
+            setIsFavorite(true);
+          } else {
+            setIsFavorite(false);
+          }
+        };
+        getUser();
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
+  }, [session]);
+
+  const addToMyList = async () => {
     try {
-      const res = await fetch(`/api/user/${session?.user?.email}`);
+      setIsLoading(true);
+      const res = await fetch(`/api/user/${session?.user?.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ movieId: movie.id }),
+      });
       const data = await res.json();
       setUser(data);
       if (data.favoriteMovies.includes(movie.id)) {
         setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
       }
-    } catch (error: any) {
+      setIsLoading(false);
+      router.refresh();
+    } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (session) {
-      getUser();
-    }
-  }, [session]);
-
   return (
     <div className="flex flex-col items-center justify-center md:flex-row lg:h-[70vh] lg:gap-10 lg:p-8 xl:p-16">
       <div className="relative h-[200px] w-[200px] rounded-lg border border-black md:h-[300px] md:w-[300p] lg:h-[400px] lg:w-[400px] xl:h-[600px] xl:w-[600px]">
@@ -128,9 +154,14 @@ const DetailsCard = ({ movie, trailerKey }: IProps) => {
             </div>
           </div>
         </div>
+
         {!isFavorite && (
-          <button className="flex w-1/2 flex-wrap items-center justify-center gap-4 rounded-lg bg-red-500 px-4 py-2 font-semibold duration-500 hover:bg-white/50  md:px-8 md:py-4 md:text-lg">
-            Add to play list
+          <button
+            onClick={addToMyList}
+            disabled={isLoading}
+            className={`flex w-1/2 flex-wrap items-center justify-center gap-4 rounded-lg bg-red-500 px-4 py-2 font-semibold duration-500 hover:bg-white/50  md:px-8 md:py-4 md:text-lg ${isLoading ? "disabled:opacity-40" : ""}`}
+          >
+            {isLoading ? "Adding ..." : "Add to play list"}
           </button>
         )}
       </div>
