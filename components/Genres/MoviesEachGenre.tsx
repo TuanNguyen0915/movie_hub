@@ -1,5 +1,5 @@
 "use client";
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/navigation";
@@ -33,7 +33,7 @@ const MoviesEachGenre = ({ movies }: { movies: IMovie[] }) => {
             1688: {
               slidesPerView: 5.5,
               spaceBetween: 20,
-            }
+            },
           }}
           scrollbar={{ draggable: true }}
           navigation={true}

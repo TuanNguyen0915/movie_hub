@@ -1,9 +1,8 @@
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 
 const MovieCard = ({ movie }: { movie: IMovie }) => {
-
   const movieBackground = `https://image.tmdb.org/t/p/w400${
     movie?.backdrop_path ? movie.backdrop_path : movie.poster_path
   }`;

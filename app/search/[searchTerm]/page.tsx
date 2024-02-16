@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchSearchMovie } from "@/actions/getMoviesData";
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";

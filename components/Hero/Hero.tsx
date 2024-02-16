@@ -1,6 +1,6 @@
 "use client";
 import { fetchTrendingMovies } from "@/actions/getMoviesData";
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 
 import {
   IoPlayCircleOutline,
@@ -53,8 +53,7 @@ const Hero = () => {
               className="relative h-[40vh] w-full rounded-lg bg-cover bg-center bg-no-repeat max-md:mt-[10vh] md:h-[90vh]"
             >
               {/* MASK */}
-              <div
-               className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.6)] px-5 md:h-[90vh] md:px-20">
+              <div className="absolute z-10 flex h-[40vh] w-full flex-col items-center rounded-lg bg-[rgba(0,0,0,0.6)] px-5 md:h-[90vh] md:px-20">
                 <div className="group flex w-full flex-1 flex-col max-md:mt-10 md:justify-center">
                   <div className="h-[100px]">
                     <p className="flex items-center text-3xl text-red-500 duration-500 md:text-5xl md:group-hover:text-7xl">

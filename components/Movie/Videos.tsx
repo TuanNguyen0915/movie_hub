@@ -1,5 +1,5 @@
 "use client";
-import { IVideo } from "@/types";
+import { IVideo } from "@/types/types";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -22,7 +22,7 @@ const Videos = ({ videos }: { videos: IVideo[] }) => {
     }
     // names must be equal
     return 0;
-  })
+  });
   const [openVideo, setOpenVideo] = useState(false);
   const [selectedKey, setSelectKey] = useState("");
 

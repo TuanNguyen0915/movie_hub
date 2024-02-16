@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import DetailsCard from "./DetailsCard";
-import { ICast, IMovie, IReview, IVideo } from "@/types";
+import { ICast, IMovie, IReview, IVideo } from "@/types/types";
 import Casts from "./Casts";
 import Reviews from "./Reviews";
 import Videos from "./Videos";

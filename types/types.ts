@@ -49,3 +49,9 @@ export interface IVideo {
   id: string;
   key: string;
 }
+
+export interface IFormData {
+  username?: string
+  email: string
+  password: string
+}

@@ -4,7 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import "swiper/css";
 import Image from "next/image";
-import { ICast } from "@/types";
+import { ICast } from "@/types/types";
 
 const Casts = ({ casts }: { casts: ICast[] }) => {
   return (

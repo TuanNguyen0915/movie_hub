@@ -1,5 +1,5 @@
 "use client";
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -59,7 +59,7 @@ const DetailsCard = ({ movie, trailerKey }: IProps) => {
             ( {movie.vote_count} votes ){" "}
           </span>
         </p>
-        <div className="flex w-full items-center gap-10 lg:w-1/2">
+        <div className="flex w-full flex-wrap items-center gap-10">
           <button className="flex items-center justify-center gap-4 rounded-lg bg-gray-300 px-4 py-2 text-base font-semibold text-black duration-500 hover:bg-red-500 hover:text-white md:px-8 md:py-4 md:text-lg">
             <IoPlayCircleOutline className="scale-[2]" />
             <p>Play Movie</p>

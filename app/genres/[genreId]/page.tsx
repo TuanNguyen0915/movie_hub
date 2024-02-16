@@ -1,7 +1,7 @@
 "use client";
 
 import { fetchGenresMovies } from "@/actions/getMoviesData";
-import { IMovie } from "@/types";
+import { IMovie } from "@/types/types";
 import { set } from "mongoose";
 import Image from "next/image";
 import Link from "next/link";

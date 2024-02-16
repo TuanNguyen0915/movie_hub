@@ -3,10 +3,10 @@ import Link from "next/link";
 import SearchInput from "./SearchInput";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [dropDownMenu, setDropDownMenu] = useState<boolean>(false);
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
@@ -22,6 +22,11 @@ const Navbar = () => {
     // Cleanup function when component unmount (don't scroll)
     return () => window.removeEventListener("scroll", handleScrolling);
   }, []);
+
+  const handleLogOut = () => {
+    signOut({ callbackUrl: "/login" });
+  };
+
   return (
     <nav
       className={`sticky top-0 z-30 flex w-full items-center justify-between p-5 ${isScroll && "bg-black/80 backdrop-blur-lg backdrop-filter"}`}
@@ -41,14 +46,13 @@ const Navbar = () => {
       <div className="hidden items-center gap-10 lg:flex">
         <Link
           href="/"
-          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === '/'?'text-red-500':''}`}
+          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === "/" ? "text-red-500" : ""}`}
         >
           Home
         </Link>
         <Link
           href="/my-list"
-          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === '/my-list'?'text-red-500':''}`}
-
+          className={`text-xl font-semibold duration-700 hover:text-red-500 ${pathname === "/my-list" ? "text-red-500" : ""}`}
         >
           My List
         </Link>
@@ -74,14 +78,13 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            onClick={() => setDropDownMenu(false)}
             href="/my-list"
             className="text-end text-lg font-semibold text-white duration-700 hover:text-red-500"
           >
             My List
           </Link>
           <p
-            onClick={() => setDropDownMenu(false)}
+            onClick={handleLogOut}
             className="text-end text-lg font-semibold text-white duration-700 hover:text-red-500"
           >
             Log Out

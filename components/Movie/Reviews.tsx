@@ -4,14 +4,16 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import { IReview } from "@/types";
+import { IReview } from "@/types/types";
 
 import Review from "./Review";
 
 const Reviews = ({ reviews }: { reviews: IReview[] }) => {
   if (reviews.length === 0) {
     return (
-      <p className="text-xl text-slate-300">Sorry we don't have any review yet</p>
+      <p className="text-xl text-slate-300">
+        Sorry we don't have any review yet
+      </p>
     );
   }
   return (
