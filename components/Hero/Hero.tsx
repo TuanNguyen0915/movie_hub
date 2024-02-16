@@ -1,11 +1,7 @@
 "use client";
 import { fetchTrendingMovies } from "@/actions/getMoviesData";
 import { IMovie } from "@/types/types";
-
-import {
-  IoInformationCircleOutline,
-} from "react-icons/io5";
-
+import { IoInformationCircleOutline } from "react-icons/io5";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
@@ -18,9 +14,11 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 
 const Hero = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [trending, setTrending] = useState([]);
   useEffect(() => {
     try {
+      setLoading(true);
       const fetchData = async () => {
         const data = await fetchTrendingMovies();
         setTrending(data);
@@ -28,8 +26,17 @@ const Hero = () => {
       fetchData();
     } catch (error) {
       toast.error("something wrong");
+    } finally {
+      setLoading(false);
     }
   }, []);
+  if (loading) {
+    return (
+      <div className="item-center flex h-[80vh] w-full justify-center">
+        <p className="text-5xl text-red-500">Loading ....</p>
+      </div>
+    );
+  }
   return (
     <section className="relative w-full">
       <Swiper

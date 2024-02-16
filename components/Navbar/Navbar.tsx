@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-30 flex w-full items-center justify-between p-5 ${isScroll && "bg-black/80 backdrop-blur-lg backdrop-filter"}`}
+      className={`sticky top-0 z-50 flex w-full items-center justify-between p-5 ${isScroll && "bg-black/50 backdrop-blur-2xl"}`}
     >
       {/* LOGO */}
       <div className="group flex items-center">

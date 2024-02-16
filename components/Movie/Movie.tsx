@@ -8,12 +8,14 @@ import Videos from "./Videos/Videos";
 import Similar from "./Similar/Similar";
 
 const Movie = ({ movieId }: { movieId: any }) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [movieDetails, setMovieDetails] = useState<IMovie>();
   const [casts, setCasts] = useState<ICast[] | []>([]);
   const [reviews, setReviews] = useState<IReview[] | []>([]);
   const [trailerKey, setTrailerKey] = useState("");
   useEffect(() => {
     try {
+      setLoading(true);
       const options = {
         method: "GET",
         headers: {
@@ -58,8 +60,18 @@ const Movie = ({ movieId }: { movieId: any }) => {
       fetchData();
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }, [movieId]);
+
+  if (loading) {
+    return (
+      <div className="item-center flex h-[80vh] w-full justify-center">
+        <p className="text-5xl text-red-500">Loading ....</p>
+      </div>
+    );
+  }
 
   return (
     <main className="flex flex-col">

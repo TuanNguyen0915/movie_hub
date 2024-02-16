@@ -24,6 +24,15 @@ export const getSimilar = async (collectionId: string | number) => {
 };
 
 export const fetchSearchMovie = async (searchTerm: string | string[]) => {
-  const data = await getMoviesApi(`/search/movie?query=${searchTerm}&language=en-US&page=1`)
-  return data.results
+  const data = await getMoviesApi(
+    `/search/movie?query=${searchTerm}&language=en-US&page=1`,
+  );
+  return data.results;
+};
+
+export const fetchMovieDetails = async (movieId: string | number) => {
+  const data = await getMoviesApi(
+    `/movie/${movieId}?append_to_response=videos`
+  )
+  return data
 };
